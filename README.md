@@ -4,6 +4,8 @@ Automatic subtitle generation using OpenAI's Whisper for jellyfin.
 ## Install
 Using a venv:
 ```sh
+git clone https://github.com/westhecool/Media-Library-Automatic-Subtitle-Generation.git
+cd Media-Library-Automatic-Subtitle-Generation
 python3 -m venv venv
 ./venv/bin/pip install -r requirements.txt
 ```
