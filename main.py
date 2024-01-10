@@ -55,7 +55,7 @@ def process_file(path):
     print(f"Processing {path}...")
     mp3file = _path.with_suffix(".mp3")
     print(f"Converting {_path.as_posix()} to {mp3file.as_posix()}...")
-    subprocess.run(["ffmpeg", "-hide_banner", "-i", path, mp3file.as_posix(), "-y"])
+    subprocess.run(["ffmpeg", "-hide_banner", "-i", path, "-ac", "2", mp3file.as_posix(), "-y"])
     print(f"Transcribing {mp3file.as_posix()}...")
     segments, info = model.transcribe(mp3file.as_posix(), language=args.language)
     #print("Detected language '%s' with probability %f." % (info.language, info.language_probability))
@@ -86,6 +86,9 @@ elif input.is_dir():
         for file in files:
             if file.endswith(".mkv") or file.endswith(".mp4") or file.endswith(".avi") or file.endswith(".mov") or file.endswith(".webm"):
                 if not os.path.exists(pathlib.Path(os.path.join(root, file)).with_suffix(".srt").as_posix()):
-                    process_file(os.path.join(root, file))
+                    try:
+                        process_file(os.path.join(root, file))
+                    except Exception as e:
+                        print(e)
                 else:
                     print(f"Skipping {os.path.join(root, file)} because the subtitles already exist.")
