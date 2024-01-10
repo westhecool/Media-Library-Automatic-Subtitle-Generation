@@ -7,7 +7,7 @@ import sys
 
 args = argparse.ArgumentParser()
 args.description = "Automatic subtitle generation using OpenAI's Whisper for jellyfin."
-args.add_argument("--model", type=str, help="Model to use. (Default: large-v2)", default="large-v2")
+args.add_argument("--model", type=str, help="Model to use. (Default: large-v3)", default="large-v3")
 args.add_argument("--language", type=str, help="Language to transcribe for. (Default: en)", default="en")
 args.add_argument("--gpu", type=bool, help="Use GPU.", default=False, action=argparse.BooleanOptionalAction)
 args.add_argument("input", type=str, help="Input file or directory. (Is recursive if a directory is provided.)")
