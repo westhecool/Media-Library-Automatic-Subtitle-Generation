@@ -10,6 +10,7 @@ args.description = "Automatic subtitle generation using OpenAI's Whisper for jel
 args.add_argument("--model", type=str, help="Model to use. (Default: large-v3)", default="large-v3")
 args.add_argument("--language", type=str, help="Language to transcribe for. (Default: en)", default="en")
 args.add_argument("--gpu", type=bool, help="Use GPU.", default=False, action=argparse.BooleanOptionalAction)
+args.add_argument("--gpu-index", type=int, help="The index of the GPU to use. (Starting from 0) (Default: 0)", default=0)
 args.add_argument("input", type=str, help="Input file or directory. (Is recursive if a directory is provided.)")
 args = args.parse_args()
 
@@ -45,7 +46,7 @@ model_size = args.model
 from faster_whisper import WhisperModel
 
 if args.gpu:
-    model = WhisperModel(args.model, device="cuda", compute_type="int8_float16")
+    model = WhisperModel(args.model, device="cuda", compute_type="int8_float16", device_index=args.gpu_index)
 else:
     model = WhisperModel(args.model, device="cpu", compute_type="int8")
 
